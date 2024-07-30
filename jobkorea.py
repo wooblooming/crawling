@@ -156,7 +156,3 @@ def self_introduction_crawl(driver:webdriver.Chrome,file_url):
         '직무명' : job_title,
         'QnA' : qna_pairs
     }
-
-
-print("test1commit")
-print("test2commit")
