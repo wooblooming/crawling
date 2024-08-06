@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
 
-file_path = 'C:/Users/wjwj9/Desktop/chromedriver-win64_0717/chromedriver-win64/jobkorea_link6.txt'
+file_path = 'C:/Users/wjwj9/Desktop/chromedriver-win64_0717/jobkorea_link6.txt'
 
 output_file = 'jobkorea6.csv'
 columns = ['지원 회사 이름', '지원 시기', '직무명']

@@ -34,7 +34,6 @@ def _get_urls_to_detail_page(driver:webdriver.Chrome) -> list[str]:
     array = list(OrderedDict.fromkeys(array))
     return array
 
-
 def save_url_list(driver:webdriver.Chrome):    
     array= _get_urls_to_detail_page(driver)
     with open("C:/Users/wjwj9/Desktop/chromedriver-win64_0717/chromedriver-win64/jobkorea_link6.txt", 'w') as f:
