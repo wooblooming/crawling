@@ -5,6 +5,8 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import Select
 import csv
 import time
 
@@ -56,24 +58,38 @@ def scroll_to_bottom():
 
 # 첫 번째 dl의 첫 번째 li 클릭
 first_li_in_first_dl = WebDriverWait(driver, 10).until(
-    EC.element_to_be_clickable((By.CSS_SELECTOR, '.ly_sub_cnt.colm3-ty1.clear dl:nth-of-type(1) .nano.has-scrollbar .nano-content.dev-main ul li:nth-child(8)'))
+    EC.element_to_be_clickable((By.CSS_SELECTOR, '.ly_sub_cnt.colm3-ty1.clear dl:nth-of-type(1) .nano.has-scrollbar .nano-content.dev-main ul li:nth-child(6)'))
 )
 first_li_in_first_dl.click()
 time.sleep(2)
 
 # 두 번째 dl의 첫 번째 li 클릭
 first_li_in_second_dl = WebDriverWait(driver, 10).until(
-    EC.element_to_be_clickable((By.CSS_SELECTOR, '.ly_sub_cnt.colm3-ty1.clear dl:nth-of-type(2) .nano.has-scrollbar .nano-content.dev-sub ul:nth-child(2) li:first-child'))
+    EC.element_to_be_clickable((By.CSS_SELECTOR, '.ly_sub_cnt.colm3-ty1.clear dl:nth-of-type(2) .nano.has-scrollbar .nano-content.dev-sub ul:nth-child(2) li:nth-child(12)'))
 )
 first_li_in_second_dl.click()
 time.sleep(2)
 
-# 두 번째 dl의 첫 번째 li 클릭
-first_li_in_second_dl = WebDriverWait(driver, 10).until(
-    EC.element_to_be_clickable((By.CSS_SELECTOR, '.ly_sub_cnt.colm3-ty1.clear dl:nth-of-type(2) .nano.has-scrollbar .nano-content.dev-sub ul:nth-child(2) li:nth-child(4)'))
-)
-first_li_in_second_dl.click()
-time.sleep(2)
+# # 두 번째 dl의 첫 번째 li 클릭
+# first_li_in_second_dl = WebDriverWait(driver, 10).until(
+#     EC.element_to_be_clickable((By.CSS_SELECTOR, '.ly_sub_cnt.colm3-ty1.clear dl:nth-of-type(2) .nano.has-scrollbar .nano-content.dev-sub ul:nth-child(2) li:nth-child(2)'))
+# )
+# first_li_in_second_dl.click()
+# time.sleep(2)
+
+# # 두 번째 dl의 첫 번째 li 클릭
+# first_li_in_second_dl = WebDriverWait(driver, 10).until(
+#     EC.element_to_be_clickable((By.CSS_SELECTOR, '.ly_sub_cnt.colm3-ty1.clear dl:nth-of-type(2) .nano.has-scrollbar .nano-content.dev-sub ul:nth-child(2) li:nth-child(3)'))
+# )
+# first_li_in_second_dl.click()
+# time.sleep(2)
+
+# # 두 번째 dl의 첫 번째 li 클릭
+# first_li_in_second_dl = WebDriverWait(driver, 10).until(
+#     EC.element_to_be_clickable((By.CSS_SELECTOR, '.ly_sub_cnt.colm3-ty1.clear dl:nth-of-type(2) .nano.has-scrollbar .nano-content.dev-sub ul:nth-child(2) li:nth-child(8)'))
+# )
+# first_li_in_second_dl.click()
+# time.sleep(2)
 
 # # 세 번째 dl의 첫 번째 li 클릭
 # first_li_in_second_dl = WebDriverWait(driver, 10).until(
@@ -95,6 +111,30 @@ btn_set = WebDriverWait(driver, 10).until(
 )
 btn_set.click()
 time.sleep(4)
+
+# 최신순 으로 변경
+new_button = WebDriverWait(driver, 10).until(
+    EC.element_to_be_clickable((By.CSS_SELECTOR, '.tplJobListFunc.clear .tplJobManBtn .tplSltBx-wrap div:nth-of-type(1)'))
+)
+new_button.click()
+time.sleep(2)
+
+# # 클릭 후, Select 클래스를 사용하여 '등록일순'을 선택하는 부분 추가
+# select_element = WebDriverWait(driver, 10).until(
+#     EC.element_to_be_clickable((By.CSS_SELECTOR, '.tplJobListFunc.clear .tplJobManBtn .tplSltBx-wrap div:nth-of-type(1) .tplSlt'))  
+# )
+
+try:
+    # 드롭다운 내 '등록일순' 옵션을 클릭하는 부분
+    # 먼저 드롭다운 내부의 옵션을 찾습니다. (등록일순의 value가 '2'임)
+    register_date_option = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, '#orderTab option[value="2"]'))
+    )
+    register_date_option.click()  # '등록일순' 옵션을 실제로 클릭
+    time.sleep(2)
+
+except TimeoutException:
+    print("Failed to locate the '등록일순' option within the specified time.")
 # 테이블 로드를 위해 하단으로 스크롤
 scroll_to_bottom()
 
@@ -137,7 +177,7 @@ def go_to_next_page_set():
     time.sleep(2)
 
 # CSV 파일에 채용 정보 저장
-with open('job_물류무역.csv', 'w', newline='', encoding='utf-8') as csvfile:
+with open('9월11일_게임제작.csv', 'w', newline='', encoding='utf-8') as csvfile:
     csvwriter = csv.writer(csvfile)
     csvwriter.writerow(['회사명','직무명', '링크'])
 
